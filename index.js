@@ -13,20 +13,23 @@ HtmlWebpackAssetPathPlugin.prototype.apply = function(compiler) {
   compiler.hooks.compilation.tap("HtmlWebpackAssetPathPlugin", function(
     compilation
   ) {
-    compilation.hooks.htmlWebpackPluginAlterAssetTags.tapAsync(
-      "HtmlWebpackAssetPathPlugin",
+    console.log("HtmlWebpackAssetPathPlugin: register hook (alterAssetTagGroups)");
+    const HtmlWebpackPlugin = require("html-webpack-plugin");
+    HtmlWebpackPlugin.getHooks(compilation).alterAssetTagGroups.tapAsync(
+      "HtmlWebpackAssetPathPlugin", 
       function(htmlPluginData, callback) {
+        console.log("HtmlWebpackAssetPathPlugin: process hook (alterAssetTagGroups)");
         let message = null;
         try {
-          self.processTags(htmlPluginData.head);
-          self.processTags(htmlPluginData.body);
+          self.processTags(htmlPluginData.headTags);
+          self.processTags(htmlPluginData.bodyTags);
         } catch (err) {
           message = "HtmlWebpackAssetPathPlugin: " + err;
         } finally {
-          callback(message);
+          callback(message, htmlPluginData);
         }
       }
-    );
+    )
   });
 };
 
