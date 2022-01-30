@@ -13,12 +13,10 @@ HtmlWebpackAssetPathPlugin.prototype.apply = function(compiler) {
   compiler.hooks.compilation.tap("HtmlWebpackAssetPathPlugin", function(
     compilation
   ) {
-    console.log("HtmlWebpackAssetPathPlugin: register hook (alterAssetTagGroups)");
     const HtmlWebpackPlugin = require("html-webpack-plugin");
     HtmlWebpackPlugin.getHooks(compilation).alterAssetTagGroups.tapAsync(
       "HtmlWebpackAssetPathPlugin", 
       function(htmlPluginData, callback) {
-        console.log("HtmlWebpackAssetPathPlugin: process hook (alterAssetTagGroups)");
         let message = null;
         try {
           self.processTags(htmlPluginData.headTags);
