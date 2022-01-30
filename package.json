@@ -1,6 +1,6 @@
 {
   "name": "html-webpack-asset-path-plugin",
-  "version": "5.0.0",
+  "version": "5.0.1",
   "description": "Addon for the html-webpack-plugin to customize the value of link-href and script-src attributes.",
   "main": "./index.js",
   "engines": {
@@ -29,14 +29,12 @@
   },
   "homepage": "https://github.com/bikusta/html-webpack-asset-path-plugin#readme",
   "peerDependencies": {
-    "html-webpack-plugin": ">= 5.0.0-beta.1 < 6",
-    "webpack": "^5.12.0"
+    "html-webpack-plugin": ">= 3.2.0 < 6",
+    "webpack": ">= 4.41.2 < 6"
   },
   "devDependencies": {
-    "@vue/cli": "^4.1.1",
-    "html-webpack-plugin": ">= 5.0.0-beta.1",
+    "html-webpack-plugin": ">= 3.2.0",
     "jasmine": "^3.5.0",
-    "npm": ">= 6.13.4",
-    "webpack": "^5.20.0"
+    "webpack": ">= 4.41.2"
   }
 }
