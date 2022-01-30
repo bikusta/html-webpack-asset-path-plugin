@@ -1,8 +1,5 @@
 # html-webpack-asset-path-plugin
 
-[![Build Status](https://travis-ci.com/bikusta/html-webpack-asset-path-plugin.svg?branch=master)](https://travis-ci.com/bikusta/html-webpack-asset-path-plugin)
-[![peerDependencies Status](https://david-dm.org/bikusta/html-webpack-asset-path-plugin/peer-status.svg)](https://david-dm.org/bikusta/html-webpack-asset-path-plugin?type=peer)
-
 Addon for the [html-webpack-plugin](https://github.com/jantimon/html-webpack-plugin/tree/v3.2.0) to customize the value of link-href and script-src attributes.
 
 ## Introduction
@@ -91,9 +88,9 @@ The following configuration solves the problem from the introductory example con
 
 ```javascript
 new HtmlWebpackAssetPathPlugin({
-  cssPrefix: "{% static 'django/css/path/",
+  cssPrefix: "{% static 'django/css/",
   cssSuffix: "' %}",
-  jsPrefix: "{% static 'django/js/path/",
+  jsPrefix: "{% static 'django/js/",
   jsSuffix: "' %}"
 });
 ```
@@ -102,7 +99,7 @@ new HtmlWebpackAssetPathPlugin({
 
 MIT License
 
-Copyright (c) 2019 Stefan Beer
+Copyright (c) 2022 Stefan Beer
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
