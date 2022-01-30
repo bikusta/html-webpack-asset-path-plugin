@@ -2,7 +2,9 @@
 
 [![npm version](https://badge.fury.io/js/html-webpack-asset-path-plugin.svg)](https://badge.fury.io/js/html-webpack-asset-path-plugin)
 
-Addon for the [html-webpack-plugin](https://github.com/jantimon/html-webpack-plugin/tree/v3.2.0) to customize the value of link-href and script-src attributes.
+_compatible with webpack 4 and 5_
+
+Addon for the [html-webpack-plugin](https://github.com/jantimon/html-webpack-plugin) to customize the value of link-href and script-src attributes.
 
 ## Introduction
 
