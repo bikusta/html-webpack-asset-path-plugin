@@ -1,3 +1,5 @@
+const thisPluginName = "html-webpack-asset-path-plugin";
+
 function HtmlWebpackAssetPathPlugin(options) {
   options = options || {};
   this.options = {
@@ -10,25 +12,52 @@ function HtmlWebpackAssetPathPlugin(options) {
 
 HtmlWebpackAssetPathPlugin.prototype.apply = function(compiler) {
   const self = this;
-  compiler.hooks.compilation.tap("HtmlWebpackAssetPathPlugin", function(
+  compiler.hooks.compilation.tap(thisPluginName, function(
     compilation
   ) {
     const HtmlWebpackPlugin = require("html-webpack-plugin");
-    HtmlWebpackPlugin.getHooks(compilation).alterAssetTagGroups.tapAsync(
-      "HtmlWebpackAssetPathPlugin", 
-      function(htmlPluginData, callback) {
-        let message = null;
-        try {
-          self.processTags(htmlPluginData.headTags);
-          self.processTags(htmlPluginData.bodyTags);
-        } catch (err) {
-          message = "HtmlWebpackAssetPathPlugin: " + err;
-        } finally {
-          callback(message, htmlPluginData);
-        }
-      }
-    )
+    if (HtmlWebpackPlugin.getHooks) {
+      self.withWebpack5(HtmlWebpackPlugin, compilation);
+    } else {
+      self.withWebpack4(compilation);
+    }    
   });
+};
+
+HtmlWebpackAssetPathPlugin.prototype.withWebpack4 = function (compilation) {
+  const self = this;
+  compilation.hooks.htmlWebpackPluginAlterAssetTags.tapAsync(
+    thisPluginName,
+    function(htmlPluginData, callback) {
+      let message = null;
+      try {
+        self.processTags(htmlPluginData.head);
+        self.processTags(htmlPluginData.body);
+      } catch (err) {
+        message = thisPluginName + ": " + err;
+      } finally {
+        callback(message);
+      }
+    }
+  );
+};
+
+HtmlWebpackAssetPathPlugin.prototype.withWebpack5 = function (HtmlWebpackPlugin, compilation) {
+  const self = this;
+  HtmlWebpackPlugin.getHooks(compilation).alterAssetTagGroups.tapAsync(
+    thisPluginName, 
+    function(htmlPluginData, callback) {
+      let message = null;
+      try {
+        self.processTags(htmlPluginData.headTags);
+        self.processTags(htmlPluginData.bodyTags);
+      } catch (err) {
+        message = thisPluginName + ": " + err;
+      } finally {
+        callback(message, htmlPluginData);
+      }
+    }
+  )
 };
 
 HtmlWebpackAssetPathPlugin.prototype.processTags = function(tags) {
